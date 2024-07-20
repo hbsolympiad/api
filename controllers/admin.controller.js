@@ -51,7 +51,7 @@ const getUsers = async(req, res) =>{
     const page = req.body.page || 1;
     try{
         // Default to page 1 if no page is specified
-        const limit = 2; // Number of users per page
+        const limit = 20; // Number of users per page
         const skip = (page - 1) * limit;
 
         const users = await User.find().skip(skip).limit(limit).select('-feePayment -uniCard -password');

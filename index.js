@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 })*/
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/HBSOlympiad")
+mongoose.connect("mongodb+srv://hbsolympiad:giFHyyfUeoEy7UcV@hbsolympiad24.idhcoh1.mongodb.net/HBSOlympiad24")
 .then(()=>{
     console.log("mongodb connect");
 })

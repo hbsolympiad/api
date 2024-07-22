@@ -8,7 +8,7 @@ const { postFormSolo } = require('./form.controller');
 
 const signupUser = async (req, res) => {
     const{email}=req.body;
-    console.log(req.body);
+    //console.log(req.body);
     const uniCardImg = req.body.uniCardImgFR;
     function getFileType(base64Data) {
         //console.log(base64Data)
@@ -34,7 +34,7 @@ const signupUser = async (req, res) => {
         if(check){
             return res.status(201).json({ message: 'Email already exists' });
         }
-        console.log(req.body)
+        //console.log(req.body)
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = new User({
             name: req.body.name,
@@ -46,10 +46,10 @@ const signupUser = async (req, res) => {
             approved: false,
             password: hashedPassword
         });
-        console.log(newUser);
+        //console.log(newUser);
         await newUser.save();
         const token = jwt.sign({name: newUser.name, email: newUser.email, userID: newUser._id}, 'test', { expiresIn: "1h"});
-        console.log(token);
+        //console.log(token);
         res.status(201).json({result: newUser, token, message: "User Registered Successfully"});
     }
     catch(e){
@@ -60,7 +60,7 @@ const signupUser = async (req, res) => {
 const loginUser = async(req, res) => {
     
     const{email,password}=req.body
-    console.log(req.body);
+    //console.log(req.body);
     try{
         const user = await User.findOne({email:email});
         if(!user){
@@ -71,9 +71,9 @@ const loginUser = async(req, res) => {
         if(!passwordMatch){
             return res.status(501).json({ error: 'Invalid credentials'});
         }
-        console.log(user);
+        //console.log(user);
         const token = jwt.sign({name: user.name, email: user.email, userID: user._id}, 'test', { expiresIn: "1h"});
-        console.log(token);
+        //console.log(token);
         res.status(201).json({result: user, token, message: "User logged in successful"});
     }
     catch(e){

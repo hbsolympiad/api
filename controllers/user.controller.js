@@ -10,6 +10,9 @@ const signupUser = async (req, res) => {
     const{email}=req.body;
     //console.log(req.body);
     const uniCardImg = req.body.uniCardImgFR;
+    if(!uniCardImg){
+        return res.status(200).json({ message: 'Please upload your uni card image to sign up'});
+    }
     function getFileType(base64Data) {
         //console.log(base64Data)
         const fileType = base64Data.substring("data:image/".length, base64Data.indexOf(";base64"));

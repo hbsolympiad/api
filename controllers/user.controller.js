@@ -11,7 +11,7 @@ const signupUser = async (req, res) => {
     //console.log(req.body);
     const uniCardImg = req.body.uniCardImgFR;
     if(!uniCardImg){
-        return res.status(200).json({ message: 'Please upload your uni card image to sign up'});
+        return res.status(400).json({ message: 'Please upload your uni card image to sign up'});
     }
     function getFileType(base64Data) {
         //console.log(base64Data)
@@ -29,13 +29,13 @@ const signupUser = async (req, res) => {
 
     // Validate file type
     if (!allowedTypes.includes(fileType)) {
-        return res.status(200).json({ message: 'Invalid file type. Only PNG, JPG, and JPEG are allowed.' });
+        return res.status(400).json({ message: 'Invalid file type. Only PNG, JPG, and JPEG are allowed.' });
     }
 
     try{
         const check = await User.findOne({email:email})
         if(check){
-            return res.status(201).json({ message: 'Email already exists' });
+            return res.status(401).json({ message: 'Email already exists' });
         }
         //console.log(req.body)
         const hashedPassword = await bcrypt.hash(req.body.password, 10);

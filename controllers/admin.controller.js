@@ -195,7 +195,7 @@ const deleteUser = async(req, res) => {
             // Find the event by its title (eventName) and decrement the registered count
             const event = await Event.findOneAndUpdate(
                 { title: eventName },
-                { $inc: { registered: -0 } }, // Decrement registered count by 1
+                { $inc: { registered: -1 } }, // Decrement registered count by 1
                 { new: true } // Return the updated document
             );
 
@@ -222,7 +222,7 @@ const deleteUser = async(req, res) => {
             console.log("check2 ")
             const teamEvent = await Event.findOneAndUpdate(
                 {title: eventName},
-                { $inc: {registered: -0} },
+                { $inc: {registered: -1} },
                 {new: true}
             );
             if (teamEvent) {
